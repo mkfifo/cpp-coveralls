@@ -81,14 +81,8 @@ def run():
 
     if not args.no_gcov:
         coverage.run_gcov(args)
+
     cov_report = coverage.collect(args)
-    if args.verbose:
-        print(cov_report)
-    if args.dryrun:
-        return 0
-    if args.dump:
-        args.dump.write(json.dumps(cov_report))
-        return 0
 
     # check if we have a token, a token can be provided in any of the following 3 ways:
     #   via our yaml configuration
@@ -101,5 +95,13 @@ def run():
                          "\tflag `--token`\n"
                          "\tenv var `COVERALLS_REPO_TOKEN`\n"
                          "\tyaml config file\n")
+
+    if args.verbose:
+        print(cov_report)
+    if args.dryrun:
+        return 0
+    if args.dump:
+        args.dump.write(json.dumps(cov_report))
+        return 0
 
     return report.post_report(cov_report)
