@@ -14,7 +14,8 @@ __classifiers__ = [
     'Topic :: Internet :: WWW/HTTP',
     'Topic :: Software Development :: Libraries',
     'Topic :: Software Development :: Quality Assurance',
-    'Topic :: Utilities']
+    'Topic :: Utilities',
+]
 
 __copyright__ = '2015, %s ' % __author__
 __license__ = """
@@ -95,11 +96,10 @@ def run():
     #   in the environment as a variable named `COVERALLS_REPO_TOKEN`
     # if we do not have a token at this point then all those options have been exhausted
     if not cov_report.get("repo_token"):
-        raise ValueError(
-                "no coveralls.io token specified\n"
-                "you can specify a token via:\n"
-                "\tflag `--token`\n"
-                "\tenv var `COVERALLS_REPO_TOKEN`\n"
-                "\tyaml config file")
+        raise ValueError("no coveralls.io token specified\n"
+                         "you can specify a token via:\n"
+                         "\tflag `--token`\n"
+                         "\tenv var `COVERALLS_REPO_TOKEN`\n"
+                         "\tyaml config file\n")
 
     return report.post_report(cov_report)
