@@ -89,4 +89,17 @@ def run():
         args.dump.write(json.dumps(cov_report))
         return 0
 
+    # check if we have a token, a token can be provided in any of the following 3 ways:
+    #   via our yaml configuration
+    #   on the command line via either the `-t` or `--token` flags
+    #   in the environment as a variable named `COVERALLS_REPO_TOKEN`
+    # if we do not have a token at this point then all those options have been exhausted
+    if not cov_report.get("repo_token"):
+        raise ValueError(
+                "no coveralls.io token specified\n"
+                "you can specify a token via:\n"
+                "\tflag `--token`\n"
+                "\tenv var `COVERALLS_REPO_TOKEN`\n"
+                "\tyaml config file")
+
     return report.post_report(cov_report)
