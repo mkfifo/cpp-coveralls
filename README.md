@@ -57,9 +57,17 @@ optional arguments:
   --dump [FILE]         dump JSON payload to a file
 ```
 
-## Example `.travis.yml`
+## Travis-ci usage
 
-### Linux
+You will need to expose your coveralls.io "repo token" without exposing it in your github repository,
+you can find this token on your coveralls.io project page.
+
+To expose this to cpp-coveralls export an environmental variable `COVERALLS_REPO_TOKEN` from your travis-ci
+project settings, for help see [http://docs.travis-ci.com/user/environment-variables/#Using-Settings](http://docs.travis-ci.com/user/environment-variables/#Using-Settings)
+
+### Example `.travis.yml`
+
+#### Linux
 
 Install `cpp-coveralls` with `pip`, add *gcov* to your compilation option, compile, run your test and send the result to http://coveralls.io :
 ```
@@ -74,7 +82,7 @@ after_success:
   - coveralls --exclude lib --exclude tests --gcov-options '\-lp'
 ```
 
-### OS X
+#### OS X
 
 *Python* on *OS X* can be a bit of a hassle so you need to install to set up your custom environment:
 
